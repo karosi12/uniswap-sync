@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  uniswap-db:
+    image: postgres:13-alpine
+    container_name: uniswap-db
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: password4321
+      POSTGRES_DB: uniswap
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - uniswap-net
+
+  uniswap-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: uniswap-app
+    depends_on:
+      - uniswap-db
+    environment:
+      DATABASE_HOST: uniswap-db
+      DATABASE_PORT: 5432
+      DATABASE_USER: root
+      DATABASE_PASSWORD: password4321
+      DATABASE_NAME: uniswap
+    ports:
+      - '3300:3300'
+    networks:
+      - uniswap-net
+
+networks:
+  uniswap-net:
+    driver: bridge
+
+volumes:
+  postgres_data:
