@@ -48,7 +48,7 @@ npm run test
 ```sh
 npm run format
 ```
-### Step 5(optional): Run the Application using docker-compose
+### Step 6(optional): Run the Application using docker-compose
 ```sh
 docker-compose up --build 
 # To run docker compose in detach mode
