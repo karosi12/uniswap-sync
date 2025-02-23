@@ -5,9 +5,9 @@ services:
     image: postgres:13-alpine
     container_name: uniswap-db
     environment:
-      POSTGRES_USER: root
-      POSTGRES_PASSWORD: password4321
-      POSTGRES_DB: uniswap
+      POSTGRES_USER: ${DATABASE_USER}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+      POSTGRES_DB: ${DATABASE_NAME}
     volumes:
       - postgres_data:/var/lib/postgresql/data
     networks:
@@ -22,12 +22,13 @@ services:
       - uniswap-db
     environment:
       DATABASE_HOST: uniswap-db
-      DATABASE_PORT: 5432
-      DATABASE_USER: root
-      DATABASE_PASSWORD: password4321
-      DATABASE_NAME: uniswap
+      DATABASE_PORT: ${DATABASE_PORT}
+      DATABASE_USER: ${DATABASE_USER}
+      DATABASE_PASSWORD: ${DATABASE_PASSWORD}
+      DATABASE_NAME: ${DATABASE_NAME}
+      UNISWAP_URL: ${UNISWAP_URL}
     ports:
-      - '3300:3300'
+      - '3030:3030'
     networks:
       - uniswap-net
 
