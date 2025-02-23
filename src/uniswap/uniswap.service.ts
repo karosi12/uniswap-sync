@@ -25,7 +25,7 @@ export class UniswapService {
 
   @Cron('* */30 * * * *')
   async handleCron() {
-    this.logger.debug('Called every 30 minutes');
+    this.logger.log('Called every 30 minutes');
     await this.fetchAndStoreData();
   }
 
